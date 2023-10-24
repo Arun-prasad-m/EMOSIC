@@ -1,0 +1,100 @@
+{% load static %}
+{% block content %}
+{% include 'header.html' %}
+    <!-- end header -->
+
+    <div class="contactbg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="contacttitlepage">
+                        <h2>REGISTER</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-6 offset-md-3">
+                <div class="address">
+
+                    <form method="POST" onsubmit="return validateForm()" action="addreg">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input class="contactus" name="name" placeholder="Name" type="text" >
+                            </div>
+                            <div class="col-sm-12">
+                                <input class="contactus" placeholder="Phone" pattern="[6789][0-9]{9}" type="tel" name="phone">
+                            </div>
+                            <div class="col-sm-12">
+                                <input class="contactus" placeholder="Email" type="email" name="email">
+                            </div>
+
+                              <div class="col-sm-12">
+                                <input class="contactus" id="pswd1" placeholder="Password" type="password" name="password">
+                                <span id = "message1" style="color:red"> </span>
+                            </div>
+                            <div class="col-sm-12">
+                                <input class="contactus" id="pswd2" placeholder="Confirm Password" type="password" name="password">
+                                <span id = "message2" style="color:red"> </span>
+                            </div>
+                            <center>
+                            <div class="col-6" style="text-align: center;">
+                                <button class="btn btn-danger " type="submit" name="submit" value="submit">Register</button>
+                            </div></center>
+                           
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>  
+        function validateForm() {  
+            //collect form data in JavaScript variables  
+            var pw1 = document.getElementById("pswd1").value;  
+            var pw2 = document.getElementById("pswd2").value;  
+  
+              
+            //check empty first name field  
+ 
+            
+            //check empty password field  
+            if(pw1 == "") {  
+              document.getElementById("message1").innerHTML = "**Fill the password please!";  
+              return false;  
+            }  
+            
+            //check empty confirm password field  
+            if(pw2 == "") {  
+              document.getElementById("message2").innerHTML = "**Enter the password please!";  
+              return false;  
+            }   
+             
+            //minimum password length validation  
+            if(pw1.length < 4) {  
+              document.getElementById("message1").innerHTML = "**Password length must be atleast 4characters";  
+              return false;  
+            }  
+          
+            //maximum length of password validation  
+            if(pw1.length >16) {  
+              document.getElementById("message1").innerHTML = "**Password length must not exceed 4 characters";  
+              return false;  
+            }  
+            
+            if(pw1 != pw2) {  
+              document.getElementById("message2").innerHTML = "**Passwords are not same";  
+              return false;  
+            } else {  
+              alert (" Successfully Registered ");  
+            }  
+         }  
+        </script>  
+    <!--  footer -->
+<br><br><br><br><br>
+    {% include 'footer.html' %}
+    {% endblock %}
